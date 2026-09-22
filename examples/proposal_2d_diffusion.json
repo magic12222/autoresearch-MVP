@@ -1,0 +1,16 @@
+{
+  "title": "小型二维扩散模型中的时间步采样比较",
+  "motivation": "在可控的二维数据集上检查训练时间步选择对生成质量和计算成本的影响。",
+  "hypothesis": "在相同训练预算下，非均匀时间步采样可能改善部分二维分布的拟合；该假设尚未验证，也不声称新颖。",
+  "method": "以固定的二维扩散基线为对照，仅改变训练时间步采样分布，保持网络、数据、随机种子和评估方法一致。",
+  "experiment_plan": [
+    "复现并记录原始二维扩散基线及其指标。",
+    "以同等预算运行一个时间步采样变体，并对多个随机种子报告差异。",
+    "若观察到差异，检查其他二维分布并做采样策略消融。"
+  ],
+  "expected_result": "获得可比较的质量、稳定性和耗时数据；允许变体没有改进。",
+  "search_queries": [
+    "diffusion model timestep sampling importance sampling",
+    "2D diffusion nonuniform timestep training"
+  ]
+}
