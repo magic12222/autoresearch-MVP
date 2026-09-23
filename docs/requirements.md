@@ -20,3 +20,13 @@
 - 对 429 或网络错误保留失败状态；证据不足时不得自动宣称“新颖”。
 
 选定的小型研究基线为 2D Diffusion，但示例提案仅用于验证接口，尚未完成真实训练、文献比对或想法自动生成。
+
+## P1-2：官方 2D Diffusion baseline
+
+- 以独立 Git submodule 固定 SakanaAI/AI-Scientist 和 NPEET，不把官方源码散拷到平台模块。
+- 在 `labtmx56` 上先只读核实 GPU、CUDA、Python/conda、磁盘和占用；资源不明或 GPU 繁忙时不得启动训练。
+- 按官方 README 配置 Python 3.11、项目依赖和 NPEET，在固定 commit 的 `templates/2d_diffusion` 中原样运行 `python experiment.py --out_dir run_0` 与 `python plot.py`。
+- 不修改官方实验逻辑；保存完整命令、commit、环境/GPU、时长、退出码、stdout/stderr、目录树、原始 metrics、图和 artifact 哈希。
+- baseline 成功后才实现只读导入 adapter，将官方输出映射到 ExperimentRun/journal；不得借此把 P0 CLI 开放为任意命令入口。
+
+详细复现契约见 `reproduction-ai-scientist-2d-diffusion.md`。本阶段不接 LLM，不做 Web，不生成论文。

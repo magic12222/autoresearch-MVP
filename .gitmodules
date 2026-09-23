@@ -1,0 +1,6 @@
+[submodule "upstream/AI-Scientist"]
+	path = upstream/AI-Scientist
+	url = https://github.com/SakanaAI/AI-Scientist.git
+[submodule "upstream/NPEET"]
+	path = upstream/NPEET
+	url = https://github.com/gregversteeg/NPEET.git
