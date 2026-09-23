@@ -1,0 +1,32 @@
+captured_utc=2026-09-23T03:59:56Z
+host=3090-1
+Linux 3090-1 6.8.0-139-generic #139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:52:05 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+ai_scientist_commit=1de1dbc1f4ee2c5f61e9c94348d55eb51d7fa2eb
+npeet_commit=8b0d9485423f74e5eb199324cf362765596538d3
+python=Python 3.11.16
+conda=conda 26.7.1
+env_prefix=/data/tangmingxue/experiments/ai-scientist-2d-diffusion/env
+reference_root=/data/tangmingxue/experiments/ai-scientist-2d-diffusion
+baseline_command_1=python experiment.py --out_dir run_0
+baseline_command_2=python plot.py
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/sda2      ext4  878G   16G  818G   2% /
+/dev/sda2      ext4  878G   16G  818G   2% /
+/dev/sda2      ext4  878G   16G  818G   2% /
+               total        used        free      shared  buff/cache   available
+Mem:           503Gi       207Gi       7.4Gi        42Gi       333Gi       295Gi
+Swap:          8.0Gi       6.5Mi       8.0Gi
+ 03:59:56 up 16 days, 20:53, 24 users,  load average: 3.10, 3.88, 4.29

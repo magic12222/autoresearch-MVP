@@ -1,6 +1,6 @@
 # 端到端 AI 科研智能体平台项目规划
 
-> 状态：分阶段规划，更新于 2026-09-23。P0-1 的固定样例执行与记录已实现；P1-1 的结构化提案与检索证据已实现，但真实 API 受到限流，尚无新颖性结论。P1-2 已固定官方 AI Scientist 2D Diffusion 与 NPEET upstream，等待服务器只读预检和 baseline 实跑。后续阶段和论文结果均未完成。当前实现和验证见 `docs/execution-plan.md`、`dev-log/progress.md`。
+> 状态：分阶段规划，更新于 2026-09-23。P0-1 的固定样例执行与记录已实现；P1-1 的结构化提案与检索证据已实现，但真实 API 受到限流，尚无新颖性结论。P1-2 已固定 upstream 并验证远端环境，等待空闲 GPU 后实跑 baseline。后续阶段和论文结果均未完成。当前实现和验证见 `docs/execution-plan.md`、`dev-log/progress.md`。
 
 ## 1 项目目标
 
@@ -38,7 +38,7 @@
 - 本项目是 2026-09-22 用户确认的新项目，根目录为 `D:\codex-workspace\projects\project-007-ai-research-platform`。创建前不存在目标仓库；现已完成 P0-1 固定样例执行器与本地 Git 初始化，没有导入别的项目。当前实现状态见 `docs/execution-plan.md`。
 - 初始工作目录 `D:\codex-workspace` 是包含多个独立项目的工作区，本身不是 Git 仓库。新项目当前已有 `pyproject.toml`、CLI、固定样例、实验记录、结构化提案校验、论文检索适配器和测试；仍无 Agent、LLM、前后端、数据库或论文写作实现。初始规划时无源码的判断只适用于 P0-1 开始之前。
 - 本地是 Windows 原生 PowerShell 7.6.5；已检查到 Python 3.11.4、Node.js 24.18.0、npm 11.16.0 和 Git 2.47.1。检查范围内未发现本地 Docker、`pdflatex` 或 `tectonic` 命令。未测试外部 API 或 LLM 凭据。
-- 用户提供 SSH 别名 `labtmx56`。2026-09-22 只读检查确认该服务器为原生 Linux、Bash、Python 3.12.3，配有 **4 张 NVIDIA GeForce RTX 3090（各 24 GiB）**；当时 4 张卡利用率约 94–100%，显存已占约 18.9–20.9 GiB，默认 `python3` 未安装 PyTorch。2026-09-23 的新一次 SSH 连接在预检前超时，因此当前 GPU、磁盘、conda/CUDA 和占用尚未重新验证，不能开始训练。服务器只作为官方 upstream 实验执行资源，不建立第二份平台源码仓库。
+- 用户提供 SSH 别名 `labtmx56`。2026-09-23 已重新确认服务器为 Ubuntu 24.04.4 LTS，配有 **4 张 NVIDIA GeForce RTX 3090（各 24 GiB）**、driver 595.84，磁盘约 818 GiB 可用；已建立隔离的 Python 3.11.16 / PyTorch 2.14.0+cu130 环境。预检时四张卡均有现存任务，GPU 0/1 属于其他用户，GPU 2/3 是当前用户的 PPO/Ray 任务，因此没有启动 baseline。服务器只保存官方 upstream、独立环境和复现证据，不建立第二份平台源码仓库。
 - 工作区另有 `project-005-research-workflow`，是独立的科研工作流 Skill 项目，具备证据检索、计划与写作的流程模板，可作为设计参考或外部工具调用候选；它不是本平台已有后端。其他项目也不应自动复制到新项目。
 
 ### 对比与复用判断
@@ -179,7 +179,7 @@ P4 先做只读为主的 Web MVP：Dashboard 显示当前阶段、运行中动�
 
 ## 12 下一步最应该做的一个任务
 
-**当前任务是 P1-2：原样复现官方 2D Diffusion baseline。** 官方 AI-Scientist 与 NPEET 已作为独立 submodule 固定，代码结构、许可、数据、输入输出和指标已记录于 `docs/reproduction-ai-scientist-2d-diffusion.md`。下一步是恢复 `labtmx56` 连接、完成只读资源预检，在 GPU 空闲且环境可用后按官方命令运行；成功后再实现只读输出 adapter。P0 runner 继续只允许固定样例。
+**当前任务是 P1-2：原样复现官方 2D Diffusion baseline。** 官方 upstream 与远端隔离环境均已准备并验证，代码结构、许可、数据、输入输出、指标和预检证据已记录。下一步是在一张 GPU 真正空闲后按官方命令运行；成功后再实现只读输出 adapter。P0 runner 继续只允许固定样例。
 
 P0-1 完成条件已用成功、失败和超时三个固定样例验证：命令、退出状态、stdout/stderr、指标或错误、时间与 artifact 清单能从磁盘记录读取。沙箱方案尚未确定，因此继续限制为人工审核的固定样例。
 

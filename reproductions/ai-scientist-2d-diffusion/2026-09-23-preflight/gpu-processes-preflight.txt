@@ -1,0 +1,16 @@
+captured_utc=2026-09-23T03:59:56Z
+GPU-9dd275aa-f601-2fc1-53f7-b3442197a6fd, 362839, VLLM::Worker, 20026 MiB
+GPU-e9bd1cea-0c33-7163-36a3-ff9e4e24e5ec, 362838, VLLM::Worker, 18896 MiB
+GPU-f1b5dc57-2b75-3a6b-efde-688e5694f003, 915144, /data/tangmingxue/projects/prefix-rl-reproduction/.ppo-conda-env/bin/python, 22182 MiB
+GPU-f6c187f1-e517-d609-d12e-946d0fb3d24d, 956184, ray::LLMRayActor, 542 MiB
+GPU-f6c187f1-e517-d609-d12e-946d0fb3d24d, 957523, ray::ActorModelRayActor.fit, 4512 MiB
+GPU-f6c187f1-e517-d609-d12e-946d0fb3d24d, 957521, ray::ReferenceModelRayActor, 3582 MiB
+GPU-f6c187f1-e517-d609-d12e-946d0fb3d24d, 957522, ray::CriticModelRayActor, 4806 MiB
+
+lihui     362838    19:02:51 VLLM::Worker
+lihui     362839    19:02:51 VLLM::Worker
+tangmin+  915144    11:35:48 /data/tangmingxue/projects/prefix-rl-reproduction/.ppo-conda-env/bin/python /data/tangmingxue/projects/prefix-rl-reproduction/reward_service_pilot.py --config /data/tangmingxue/projects/prefix-rl-reproduction/runs/ppo_continue252_20260922_162136_906305/reward.yaml --host 127.0.0.1 --port 15001
+tangmin+  956184    11:33:49 ray::LLMRayActor
+tangmin+  957521    11:33:24 ray::ReferenceModelRayActor
+tangmin+  957522    11:33:25 ray::CriticModelRayActor
+tangmin+  957523    11:33:25 ray::ActorModelRayActor.fit

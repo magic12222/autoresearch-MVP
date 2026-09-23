@@ -1,0 +1,5 @@
+index, name, uuid, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB], utilization.gpu [%], temperature.gpu
+0, NVIDIA GeForce RTX 3090, GPU-9dd275aa-f601-2fc1-53f7-b3442197a6fd, 595.84, 24576 MiB, 20036 MiB, 4091 MiB, 0 %, 25
+1, NVIDIA GeForce RTX 3090, GPU-e9bd1cea-0c33-7163-36a3-ff9e4e24e5ec, 595.84, 24576 MiB, 18906 MiB, 5221 MiB, 0 %, 27
+2, NVIDIA GeForce RTX 3090, GPU-f1b5dc57-2b75-3a6b-efde-688e5694f003, 595.84, 24576 MiB, 22206 MiB, 1921 MiB, 96 %, 74
+3, NVIDIA GeForce RTX 3090, GPU-f6c187f1-e517-d609-d12e-946d0fb3d24d, 595.84, 24576 MiB, 13539 MiB, 10588 MiB, 0 %, 48

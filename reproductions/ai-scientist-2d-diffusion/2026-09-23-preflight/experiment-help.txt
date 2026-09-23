@@ -1,0 +1,22 @@
+usage: experiment.py [-h] [--train_batch_size TRAIN_BATCH_SIZE]
+                     [--eval_batch_size EVAL_BATCH_SIZE]
+                     [--learning_rate LEARNING_RATE]
+                     [--num_timesteps NUM_TIMESTEPS]
+                     [--num_train_steps NUM_TRAIN_STEPS]
+                     [--beta_schedule {linear,quadratic}]
+                     [--embedding_dim EMBEDDING_DIM]
+                     [--hidden_size HIDDEN_SIZE]
+                     [--hidden_layers HIDDEN_LAYERS] [--out_dir OUT_DIR]
+
+options:
+  -h, --help            show this help message and exit
+  --train_batch_size TRAIN_BATCH_SIZE
+  --eval_batch_size EVAL_BATCH_SIZE
+  --learning_rate LEARNING_RATE
+  --num_timesteps NUM_TIMESTEPS
+  --num_train_steps NUM_TRAIN_STEPS
+  --beta_schedule {linear,quadratic}
+  --embedding_dim EMBEDDING_DIM
+  --hidden_size HIDDEN_SIZE
+  --hidden_layers HIDDEN_LAYERS
+  --out_dir OUT_DIR

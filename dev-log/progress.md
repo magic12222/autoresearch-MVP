@@ -15,3 +15,6 @@
 - 记录官方输入、输出、指标、依赖、原样运行命令、成功条件和最薄 adapter 边界。
 - 新一次 `labtmx56` SSH 连接在只读预检前超时；未在服务器创建环境、写文件或启动训练，当前 GPU/磁盘/环境状态仍待核实。
 - 本地回归运行 `python -m unittest discover -s tests -v`，6 项均通过；两个 upstream submodule 工作树均干净。
+- `labtmx56` 恢复连接后完成只读预检：Ubuntu 24.04.4 LTS、driver 595.84、4 张 RTX 3090、约 818 GiB 可用磁盘；四张卡均有现存任务，未启动训练。
+- 在 `/data/tangmingxue/experiments/ai-scientist-2d-diffusion` 建立独立 reference 和 Python 3.11.16 环境，固定两个 upstream commit。完整顶层 requirements 因 `aider-chat` 无锁版本导致大规模依赖回溯而中止；改按模板 imports 安装 baseline 最小依赖。
+- PyTorch 2.14.0+cu130、NPEET 1.0.1 等依赖安装完成；`pip check`、模板 imports 和 `experiment.py --help` 通过。原始预检与安装记录已同步到 `reproductions/ai-scientist-2d-diffusion/2026-09-23-preflight/`。

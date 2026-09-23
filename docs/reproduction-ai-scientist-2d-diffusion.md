@@ -67,11 +67,15 @@ free -h
 uptime
 ```
 
-2026-09-23 的新一次 SSH 检查在连接阶段超时，所以上述状态尚未重新获得。2026-09-22 的历史记录只能说明当时有 4 张 RTX 3090 且全部繁忙、默认 Python 3.12.3 无 PyTorch；不能据此判断当前状态。
+2026-09-23 已完成新一次预检：服务器是 Ubuntu 24.04.4 LTS，NVIDIA driver 595.84，4 张 RTX 3090，磁盘约 818 GiB 可用。采集时四张卡均有现存任务：GPU 0/1 属于其他用户，GPU 2/3 是当前用户的 PPO/Ray 任务；因此未启动 baseline。原始证据保存在 `reproductions/ai-scientist-2d-diffusion/2026-09-23-preflight/`。
 
 ## 7. 环境与原样复现命令
 
-远端工作目录必须在确认磁盘、权限和资源规则后选定。下面的占位符不得在未确认时直接当作真实路径使用。
+远端 reference root 已建立为 `/data/tangmingxue/experiments/ai-scientist-2d-diffusion`，独立环境为其 `env/`。服务器没有可直接调用的 conda；已在 `/data/tangmingxue/tools/miniconda3` 安装用户级 conda 26.7.1，并使用 conda-forge 创建 Python 3.11.16 环境，避免代替用户接受 Anaconda 默认 channel 的服务条款。
+
+完整官方 `requirements.txt` 因未锁定的 `aider-chat` 与当前依赖发生大规模版本回溯而中止。随后按模板实际 imports 安装 PyTorch、NumPy、pandas、SciPy、scikit-learn、matplotlib、tqdm 和固定 NPEET。`pip check`、imports 和 `experiment.py --help` 已通过；实际版本见预检目录中的 `pip-freeze.txt`。
+
+用于从空目录重建的命令如下；下面的占位符仍需替换为目标路径：
 
 ```bash
 git clone https://github.com/SakanaAI/AI-Scientist.git <reference-root>/AI-Scientist
@@ -132,8 +136,9 @@ adapter 只消费一个已完成的官方 run，不负责启动训练，也不�
 
 ## 10. 已知风险
 
-- 当前 SSH 不可达，无法确认 GPU 空闲、磁盘、conda/CUDA 或使用规则，也不能安全开始环境安装与训练。
+- 当前四张 GPU 均有现存任务，不能安全开始训练；GPU 0/1 还属于其他用户，严禁抢占。
 - 官方依赖未锁版本；PyTorch/CUDA 与较新 NumPy/SciPy 组合可能有兼容差异。
+- 完整顶层 requirements 当前会在 `aider-chat` 上大规模回溯；本次 baseline 使用按模板 imports 得出的最小依赖集，并保留原始失败日志。
 - 官方代码没有统一设置训练/采样 seed，单次指标存在随机波动。
 - `plot.py` 会读取当前目录所有 `run*` 目录；复现目录应只含本轮预期 run。
 - `plot.py` 调用 `plt.show()`；无图形服务器需确认 matplotlib 后端，但不应修改官方脚本。
