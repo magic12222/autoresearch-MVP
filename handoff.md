@@ -6,4 +6,4 @@
 
 重要边界：P0 仍只运行审核过的固定样例；官方实验逻辑不得修改，adapter 只能在 baseline 成功后读取输出。AI-Scientist 使用带限制与论文披露要求的自定义许可证。完整顶层 requirements 当前会在 `aider-chat` 上长时间回溯，本次只安装模板实际 imports。预检时四张 GPU 均有任务：GPU 0/1 属于其他用户，GPU 2/3 是当前用户的 PPO/Ray 任务；不得抢占。当前本地检索两个 API 仍为 HTTP 429，不能宣称想法新颖。
 
-下一步：确认一张 GPU 真正空闲且可使用后，在 `/data/tangmingxue/experiments/ai-scientist-2d-diffusion/AI-Scientist/templates/2d_diffusion` 用独立环境原样运行两条 baseline 命令并保存完整证据。成功后实现独立导入 adapter，不改 P0 runner。开放生成代码前仍需隔离执行方案。
+下一步：用户在 SSH 终端运行 `tmux new-session -s ai2d-baseline '/data/tangmingxue/experiments/ai-scientist-2d-diffusion/wait_for_idle_gpu_and_run_2d_diffusion.sh'`。脚本会等待同一张 GPU 连续空闲 5 分钟后原样运行 baseline 并保存证据；成功后同步结果并实现独立导入 adapter，不改 P0 runner。开放生成代码前仍需隔离执行方案。

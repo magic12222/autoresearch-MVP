@@ -134,7 +134,21 @@ adapter 只消费一个已完成的官方 run，不负责启动训练，也不�
 
 现有 `ExperimentSpec` 仍限制为三个 P0 样例。adapter 应使用单独的导入契约，不把 P0 runner 改造成任意命令执行器。
 
-## 10. 已知风险
+## 10. 空闲 GPU 守候脚本
+
+项目脚本 `scripts/wait_for_idle_gpu_and_run_2d_diffusion.sh` 已部署到远端 reference root。默认每 30 秒检查一次，要求同一张 GPU 连续 300 秒同时满足：无 NVIDIA compute 进程、显存占用不超过 512 MiB、利用率不超过 5%。达到条件后等待 2 秒并最终复检，再用 `CUDA_VISIBLE_DEVICES` 只暴露该卡，原样运行官方两条命令。
+
+脚本使用 `flock` 防止重复实例，不删除任何进程或结果；若发现已有 `run_0`、baseline 图片或其他 `run*` 目录则退出。它保存 stdout/stderr、退出码、时长、GPU 快照、依赖、commit、metrics、目录树和 SHA-256，并验证四个数据集的指标都是有限数值。部署后的 SHA-256 为 `7821c09ea69e5d848dccf8a1d9a9b92889c32a859bc1277b70249f50bde6fcf6`。
+
+在 SSH 终端中启动并直接进入 tmux：
+
+```bash
+tmux new-session -s ai2d-baseline '/data/tangmingxue/experiments/ai-scientist-2d-diffusion/wait_for_idle_gpu_and_run_2d_diffusion.sh'
+```
+
+用 `Ctrl-b d` 脱离；重新查看使用 `tmux attach -t ai2d-baseline`。脚本只能降低抢卡风险，服务器没有调度器，最终复检与训练启动之间仍存在很短的竞争窗口。
+
+## 11. 已知风险
 
 - 当前四张 GPU 均有现存任务，不能安全开始训练；GPU 0/1 还属于其他用户，严禁抢占。
 - 官方依赖未锁版本；PyTorch/CUDA 与较新 NumPy/SciPy 组合可能有兼容差异。

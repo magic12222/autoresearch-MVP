@@ -18,3 +18,4 @@
 - `labtmx56` 恢复连接后完成只读预检：Ubuntu 24.04.4 LTS、driver 595.84、4 张 RTX 3090、约 818 GiB 可用磁盘；四张卡均有现存任务，未启动训练。
 - 在 `/data/tangmingxue/experiments/ai-scientist-2d-diffusion` 建立独立 reference 和 Python 3.11.16 环境，固定两个 upstream commit。完整顶层 requirements 因 `aider-chat` 无锁版本导致大规模依赖回溯而中止；改按模板 imports 安装 baseline 最小依赖。
 - PyTorch 2.14.0+cu130、NPEET 1.0.1 等依赖安装完成；`pip check`、模板 imports 和 `experiment.py --help` 通过。原始预检与安装记录已同步到 `reproductions/ai-scientist-2d-diffusion/2026-09-23-preflight/`。
+- 新增并部署空闲 GPU 守候脚本：同一 GPU 连续 5 分钟无 compute 进程、显存不超过 512 MiB、利用率不超过 5% 后才复检并启动官方 baseline。远端 `bash -n`、`--help` 和 `--check-once` 已通过；单次检查确认四张卡当时均繁忙，未启动训练。
